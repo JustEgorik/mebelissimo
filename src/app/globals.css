@@ -519,6 +519,12 @@ a.mb-stat:hover {
   background: var(--tile);
 }
 
+.mb-tile-photo {
+  position: absolute;
+  inset: 0;
+  filter: saturate(0.86) contrast(1.04);
+}
+
 .mb-tile-scrim {
   position: absolute;
   inset: 0;

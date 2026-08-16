@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -181,14 +182,15 @@ export function HomeView({ featured }: { featured: Product[] }) {
   }, [measureFan, tick]);
 
   const tiles = [
-    { label: T.statBeds, href: "/shop?c=beds" },
+    { label: T.statBeds, href: "/shop?c=beds", photo: "/tiles/beds.jpg" },
     {
       label: { ru: "Кровати детские", ro: "Paturi pentru copii" },
       href: "/shop?c=kids",
+      photo: "/tiles/kids.jpg",
     },
-    { label: T.statSofas, href: "/shop?c=sofas" },
-    { label: T.wardrobes, href: "/shop" },
-    { label: T.kitchens, href: "/shop" },
+    { label: T.statSofas, href: "/shop?c=sofas", photo: "/tiles/sofas.jpg" },
+    { label: T.wardrobes, href: "/shop", photo: "/tiles/wardrobes.jpg" },
+    { label: T.kitchens, href: "/shop", photo: "/tiles/kitchens.jpg" },
   ];
 
   return (
@@ -274,6 +276,16 @@ export function HomeView({ featured }: { featured: Product[] }) {
                     animation: `mb-fade 1.3s ease ${0.95 + i * 0.035}s both`,
                   }}
                 >
+                  <div className="mb-tile-photo">
+                    <Image
+                      src={tile.photo}
+                      alt=""
+                      fill
+                      sizes="20vw"
+                      priority={i < 3}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
                   <div className="mb-tile-scrim" />
                   <div className="mb-tile-dim" />
                   <div className="mb-tile-label">{tile.label[lang]}</div>

@@ -46,13 +46,13 @@ export function ShopView({ category }: { category: CategoryId }) {
       <Header />
 
       <section className="mb-page">
-        <div className="mb-crumbs">
-          <Link href="/">{t(T.home)}</Link>
-          <span>/</span>
-          <span className="current">{categoryCopy[lang]}</span>
-        </div>
+        <div className="mb-shop-head">
+          <div className="mb-crumbs">
+            <Link href="/">{t(T.home)}</Link>
+            <span>/</span>
+            <span className="current">{categoryCopy[lang]}</span>
+          </div>
 
-        <div className="mb-shop-head" style={{ justifyContent: "flex-end" }}>
           <div className="mb-shop-tools">
             <span className="mb-count">{models(list.length, lang)}</span>
             <button
