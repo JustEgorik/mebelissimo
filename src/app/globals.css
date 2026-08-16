@@ -519,18 +519,6 @@ a.mb-stat:hover {
   background: var(--tile);
 }
 
-.mb-tile-photo {
-  position: absolute;
-  inset: 0;
-  filter: saturate(0.86) contrast(1.04);
-}
-
-.mb-tile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .mb-tile-scrim {
   position: absolute;
   inset: 0;
@@ -703,12 +691,6 @@ a.mb-stat:hover {
   aspect-ratio: 4 / 5;
   background: var(--card-photo);
   overflow: hidden;
-}
-
-.mb-card-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 /* Кнопка «В корзину» проявляется по центру фото. */
@@ -1230,12 +1212,6 @@ a.mb-stat:hover {
   overflow: hidden;
 }
 
-.mb-gallery-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .mb-thumbs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1255,12 +1231,6 @@ a.mb-stat:hover {
 
 .mb-thumb:hover {
   opacity: 0.84;
-}
-
-.mb-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .mb-prod-side {
@@ -1540,12 +1510,6 @@ a.mb-stat:hover {
   aspect-ratio: 1;
   background: var(--tile);
   overflow: hidden;
-}
-
-.mb-cart-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .mb-cart-info {

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { useCart } from "@/components/CartProvider";
@@ -38,12 +37,6 @@ export function ProductCard({
       style={style}
     >
       <div className="mb-card-photo">
-        <Image
-          src={product.image}
-          alt={name}
-          fill
-          sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw"
-        />
         {withTag && (
           <span className="mb-tag">{KIND_TAG[product.kind][lang]}</span>
         )}

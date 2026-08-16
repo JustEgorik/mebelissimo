@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -54,17 +53,8 @@ export function ProductView({
 
         <div className="mb-prod-grid">
           <div className="mb-gallery">
-            <div className="mb-gallery-main">
-              <Image
-                src={product.image}
-                alt={name}
-                fill
-                sizes="(max-width: 900px) 100vw, 55vw"
-                priority
-              />
-            </div>
-            {/* На старом сайте у товара одна фотография; сетка миниатюр
-                оставлена под будущий набор снимков. */}
+            <div className="mb-gallery-main" />
+            {/* Слоты под фотографии: главное фото 4:3 и четыре миниатюры. */}
             <div className="mb-thumbs">
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="mb-thumb" />

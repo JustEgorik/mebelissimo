@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -81,9 +80,7 @@ export function CartView() {
                   className="mb-cart-line"
                   style={{ animationDelay: `${i * 70}ms` }}
                 >
-                  <div className="mb-cart-photo">
-                    <Image src={product.image} alt={name} fill sizes="128px" />
-                  </div>
+                  <div className="mb-cart-photo" />
 
                   <div className="mb-cart-info">
                     <Link href={`/product/${product.slug}`} className="mb-cart-name">

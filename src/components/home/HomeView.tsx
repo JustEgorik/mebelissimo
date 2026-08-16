@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -8,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { useLang } from "@/components/LangProvider";
-import { PRODUCTS, countByCategory, type Product } from "@/lib/catalog";
+import { countByCategory, type Product } from "@/lib/catalog";
 import { T, models } from "@/lib/i18n";
 
 /** Настройки перехода между экранами — из data-props макета. */
@@ -182,19 +181,14 @@ export function HomeView({ featured }: { featured: Product[] }) {
   }, [measureFan, tick]);
 
   const tiles = [
-    { label: T.statBeds, href: "/shop?c=beds", photo: featured[0]?.image },
+    { label: T.statBeds, href: "/shop?c=beds" },
     {
       label: { ru: "Кровати детские", ro: "Paturi pentru copii" },
       href: "/shop?c=kids",
-      photo: PRODUCTS.find((p) => p.category === "kids")?.image,
     },
-    {
-      label: T.statSofas,
-      href: "/shop?c=sofas",
-      photo: PRODUCTS.find((p) => p.category === "sofas")?.image,
-    },
-    { label: T.wardrobes, href: "/shop", photo: undefined },
-    { label: T.kitchens, href: "/shop", photo: undefined },
+    { label: T.statSofas, href: "/shop?c=sofas" },
+    { label: T.wardrobes, href: "/shop" },
+    { label: T.kitchens, href: "/shop" },
   ];
 
   return (
@@ -280,17 +274,6 @@ export function HomeView({ featured }: { featured: Product[] }) {
                     animation: `mb-fade 1.3s ease ${0.95 + i * 0.035}s both`,
                   }}
                 >
-                  {tile.photo && (
-                    <div className="mb-tile-photo">
-                      <Image
-                        src={tile.photo}
-                        alt=""
-                        fill
-                        sizes="20vw"
-                        priority={i < 3}
-                      />
-                    </div>
-                  )}
                   <div className="mb-tile-scrim" />
                   <div className="mb-tile-dim" />
                   <div className="mb-tile-label">{tile.label[lang]}</div>
