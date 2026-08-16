@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/components/CartProvider";
 import { useLang } from "@/components/LangProvider";
+import { PhotoSlot } from "@/components/PhotoSlot";
 import {
   CATEGORIES,
   KIND_TAG,
@@ -53,11 +54,15 @@ export function ProductView({
 
         <div className="mb-prod-grid">
           <div className="mb-gallery">
-            <div className="mb-gallery-main" />
+            <div className="mb-gallery-main">
+              <PhotoSlot />
+            </div>
             {/* Слоты под фотографии: главное фото 4:3 и четыре миниатюры. */}
             <div className="mb-thumbs">
               {[0, 1, 2, 3].map((i) => (
-                <div key={i} className="mb-thumb" />
+                <div key={i} className="mb-thumb">
+                  <PhotoSlot compact />
+                </div>
               ))}
             </div>
           </div>

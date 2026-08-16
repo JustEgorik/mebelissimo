@@ -15,6 +15,8 @@ export const T = {
   navDesigners: c("Дизайнерам", "Designerilor"),
   navContacts: c("Контакты", "Contacte"),
   cart: c("Корзина", "Coș"),
+  photo: c("фото", "poză"),
+  browseFiles: c("or browse files", "or browse files"),
   catalog: c("Каталог", "Catalog"),
   inTouch: c("Мы на связи", "Suntem în contact"),
   account: c("Личный кабинет", "Cont personal"),

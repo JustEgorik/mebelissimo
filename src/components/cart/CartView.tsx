@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { useCart } from "@/components/CartProvider";
 import { useLang } from "@/components/LangProvider";
+import { PhotoSlot } from "@/components/PhotoSlot";
 import { money, productBySlug } from "@/lib/catalog";
 import { T, positions } from "@/lib/i18n";
 import { FABRICS } from "@/lib/options";
@@ -80,7 +81,9 @@ export function CartView() {
                   className="mb-cart-line"
                   style={{ animationDelay: `${i * 70}ms` }}
                 >
-                  <div className="mb-cart-photo" />
+                  <div className="mb-cart-photo">
+                    <PhotoSlot compact />
+                  </div>
 
                   <div className="mb-cart-info">
                     <Link href={`/product/${product.slug}`} className="mb-cart-name">

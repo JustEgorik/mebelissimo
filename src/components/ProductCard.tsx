@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { useCart } from "@/components/CartProvider";
 import { useLang } from "@/components/LangProvider";
+import { PhotoSlot } from "@/components/PhotoSlot";
 import { KIND_TAG, money, type Product } from "@/lib/catalog";
 import { T, fabrics } from "@/lib/i18n";
 import { SIZES } from "@/lib/options";
@@ -37,6 +38,7 @@ export function ProductCard({
       style={style}
     >
       <div className="mb-card-photo">
+        <PhotoSlot />
         {withTag && (
           <span className="mb-tag">{KIND_TAG[product.kind][lang]}</span>
         )}

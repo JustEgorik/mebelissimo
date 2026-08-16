@@ -52,8 +52,7 @@ export function ShopView({ category }: { category: CategoryId }) {
           <span className="current">{categoryCopy[lang]}</span>
         </div>
 
-        <div className="mb-shop-head">
-          <h1 className="mb-shop-title">{categoryCopy[lang]}</h1>
+        <div className="mb-shop-head" style={{ justifyContent: "flex-end" }}>
           <div className="mb-shop-tools">
             <span className="mb-count">{models(list.length, lang)}</span>
             <button
