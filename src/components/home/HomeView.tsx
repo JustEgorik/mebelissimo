@@ -20,6 +20,9 @@ const HERO_BLUR = 3;
 const LIFT = [0.34, 0.22, 0.13, 0.22, 0.34];
 const LEAD = [0, 0.05, 0.1, 0.05, 0];
 
+/** min-height пружинящего спейсера между текстом героя и полосой плиток. */
+const SPACER_MIN = 12;
+
 const REVIEWS = [
   {
     ru: "Кровать сделали точно по нашим размерам, обивку подбирали вместе с дизайнером. Через год выглядит как новая.",
@@ -49,6 +52,7 @@ export function HomeView({ featured }: { featured: Product[] }) {
   const { lang, t } = useLang();
 
   const heroRef = useRef<HTMLElement>(null);
+  const heroInnerRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const fanRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -72,22 +76,30 @@ export function HomeView({ featured }: { featured: Product[] }) {
 
   const measureFan = useCallback(() => {
     const hero = heroRef.current;
+    const heroInner = heroInnerRef.current;
     const row = fanRef.current;
     const stats = statsRef.current;
-    if (!hero || !row) return;
+    if (!hero || !heroInner || !row) return;
 
-    let rowTop = 0;
-    for (let n: HTMLElement | null = row; n && n !== hero; n = n.offsetParent as HTMLElement | null) {
-      rowTop += n.offsetTop;
-    }
+    // rowTop нельзя мерить через row.offsetParent-цепочку: между текстом
+    // героя и полосой плиток стоит пружинящий спейсер (flex: 1 1 12px),
+    // который сам растягивается, съедая весь свободный остаток высоты —
+    // а после того как мы выставим row.style.height, offsetTop плиток
+    // будет включать уже этот подогнанный спейсер. Получится замкнутый
+    // круг: «сколько места осталось» будет зависеть от высоты, которую
+    // мы только что сами поставили, и застрянет на минимуме. Меряем
+    // вместо этого от конца текстового блока героя — он не зависит от
+    // высоты полосы.
+    const heroInnerBottom = heroInner.offsetTop + heroInner.offsetHeight;
+    const available = hero.clientHeight - heroInnerBottom - SPACER_MIN;
 
-    // Высота полосы утверждена заказчиком — формулу не менять.
+    // Высота полосы по ширине — как утвердил заказчик (1/5 ширины экрана),
+    // но не выше, чем реально остаётся места в герое: иначе на широких
+    // невысоких экранах (например 1280×720) низ плитки вместе с подписью
+    // уезжает за overflow:hidden героя и подпись становится невидимой.
     row.style.height = `${Math.max(
       96,
-      Math.min(
-        window.innerWidth / 5,
-        Math.max(hero.clientHeight - rowTop, window.innerHeight * 0.56) + 20,
-      ),
+      Math.min(window.innerWidth / 5, available),
     )}px`;
 
     const cells = row.children;
@@ -199,7 +211,7 @@ export function HomeView({ featured }: { featured: Product[] }) {
 
       <div className="mb-runway">
         <section ref={heroRef} className="mb-hero">
-          <div className="mb-hero-inner">
+          <div ref={heroInnerRef} className="mb-hero-inner">
             <div
               className="mb-kicker"
               style={{ animation: "mb-rise 1s var(--ease-in) .25s both" }}
