@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  html { background: #e9e4dc; }
+  body { margin: 0; background: #e9e4dc; color: #2b2621; font-family: 'Manrope', Helvetica, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #2b2621; text-decoration: none; }
+  a:hover { color: #8a6a4b; }
+  @keyframes mb-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes mb-fade { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</helmet>
+<div style="position: relative; background: #e9e4dc; min-height: 100vh;">
+
+  <header style="position: sticky; top: 0; z-index: 60; background: rgba(233,228,220,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(43,38,33,.1); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(12px, 2vw, 32px); padding: 26px clamp(20px, 4vw, 56px); animation: mb-fade 1.2s ease .1s both;">
+    <a href="./Mebelissimo Home.dc.html" ref="{{ logoRef }}" style="position: relative; min-width: 0; display: block; width: clamp(180px, 18vw, 252px); height: clamp(34px, 3.6vw, 48px); color: #2b2621; cursor: pointer; transition: color .45s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b;">
+      <span ref="{{ markRef }}" aria-label="Mebelissimo" style="position: absolute; left: 50%; top: 50%; width: clamp(49px, 5.23vw, 70px); height: clamp(34px, 3.6vw, 48px); display: block; background: currentColor; -webkit-mask-image: url('./mebelissimo-mark.svg'); mask-image: url('./mebelissimo-mark.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; transform: translate(-50%, -50%) translateX(-40px); transition: opacity .5s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);"></span>
+      <span ref="{{ wordRef }}" aria-label="Mebelissimo" style="position: absolute; left: 50%; top: 50%; width: clamp(118px, 11.76vw, 155px); height: clamp(17.3px, 1.73vw, 22.7px); display: block; background: currentColor; -webkit-mask-image: url('./mebelissimo-word.svg'); mask-image: url('./mebelissimo-word.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; opacity: 0; transform: translate(-50%, -50%) translateX(-40px) translateY(14px); transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);"></span>
+    </a>
+    <nav style="display: flex; gap: clamp(14px, 2.2vw, 34px); font-size: clamp(12px, 1.15vw, 14px); letter-spacing: 0.11em; text-transform: uppercase; font-weight: 400; color: #4a443d; white-space: nowrap;">
+      <a data-ro="Magazin" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Магазин</a>
+      <a data-ro="Designerilor" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1); cursor: pointer;" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Дизайнерам</a>
+      <a data-ro="Contacte" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1); cursor: pointer;" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Контакты</a>
+    </nav>
+    <div style="display: flex; align-items: center; justify-content: flex-end; min-width: 0; gap: 10px;">
+      <div ref="{{ langRef }}" style="position: relative; display: flex; align-items: center; gap: 2px; padding: 4px; font-size: 11px; letter-spacing: 0.14em;">
+        <span ref="{{ knobRef }}" style="position: absolute; top: 4px; left: 4px; width: 34px; height: 23px; border-radius: 999px; background: #2b2621; transition: left .55s cubic-bezier(.34,1.42,.42,1), width .55s cubic-bezier(.34,1.42,.42,1), transform .55s cubic-bezier(.34,1.42,.42,1); pointer-events: none;"></span>
+        <span ref="{{ ruRef }}" onClick="{{ setRu }}" style="position: relative; padding: 5px 11px; cursor: pointer; color: #f4f1ec; transition: color .45s ease;">RU</span>
+        <span ref="{{ roRef }}" onClick="{{ setRo }}" style="position: relative; padding: 5px 11px; cursor: pointer; color: #8f877d; transition: color .45s ease;">RO</span>
+      </div>
+      <a ref="{{ cartRef }}" href="./Mebelissimo Cart.dc.html" style="color: #4a443d; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; font-size: clamp(12px, 1.15vw, 14px); letter-spacing: 0.05em; padding-left: clamp(10px, 1.4vw, 20px); border-left: 1px solid rgba(43,38,33,.18); transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.08em;"><span data-ro="Coș">Корзина</span><span style="display: inline-flex; align-items: center; justify-content: center; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px; background: #8a6a4b; color: #fdfbf7; font-size: 10.5px; letter-spacing: 0;">1</span></a>
+    </div>
+  </header>
+
+  <section data-screen-label="Магазин" style="padding: clamp(34px, 6vh, 64px) clamp(20px, 4vw, 56px) 0;">
+    <div style="display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d; animation: mb-fade 1s ease .05s both;">
+      <a href="./Mebelissimo Home.dc.html" style="color: inherit;" data-ro="Prima pagină">Главная</a><span>/</span><span style="color: #2b2621;" data-ro="Paturi">Кровати</span>
+    </div>
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-top: 22px; padding-bottom: 26px; animation: mb-rise .9s cubic-bezier(.2,.7,.2,1) .12s both;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+      </div>
+      <div style="display: flex; align-items: center; gap: 26px; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #5b544c;">
+        <span style="color: #8f877d;">{{ countLabel }}</span>
+        <button onClick="{{ toggleSort }}" style="display: inline-flex; align-items: center; gap: 11px; border: 0; background: none; padding: 0; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; color: #2b2621; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.21em;">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto;"><path d="M4.6 2.4v12.2"></path><path d="M1.8 11.8l2.8 2.8 2.8-2.8"></path><path d="M12.4 14.6V2.4"></path><path d="M9.6 5.2l2.8-2.8 2.8 2.8"></path></svg>
+          <span>{{ sortLabel }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; padding: 18px 0 30px; border-top: 1px solid rgba(43,38,33,.12); border-bottom: 1px solid rgba(43,38,33,.12); animation: mb-rise .9s cubic-bezier(.2,.7,.2,1) .2s both;">
+      <sc-for list="{{ filters }}" as="filter" hint-placeholder-count="6">
+        <button onClick="{{ filter.onClick }}" style="border: 1px solid {{ filter.border }}; background: {{ filter.bg }}; color: {{ filter.fg }}; cursor: pointer; padding: 11px 20px; border-radius: 999px; font-family: inherit; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; transition: background .4s ease, color .4s ease, border-color .4s ease;">{{ filter.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 56px 34px; padding: 46px 0 90px;">
+      <sc-for list="{{ items }}" as="item" hint-placeholder-count="9">
+        <a href="./Mebelissimo Product.dc.html" data-shop-card="1" style="display: flex; flex-direction: column; gap: 16px; animation: mb-rise .85s cubic-bezier(.2,.7,.2,1) both; transition: opacity .5s ease;" style-hover="opacity: .96;">
+          <div style="position: relative; aspect-ratio: 4 / 5; background: #ded7cd; overflow: hidden;">
+            <image-slot id="{{ item.slot }}" shape="rect" placeholder="фото"></image-slot>
+            <span style="position: absolute; left: 0; top: 14px; padding: 6px 12px; background: rgba(43,38,33,.82); color: #f6f2ec; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;">{{ item.tag }}</span>
+            <span data-cart-btn="1" style="position: absolute; left: 50%; top: 50%; margin-left: -84px; margin-top: -23px; width: 168px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 9px; padding: 15px 0; border: 1px solid rgba(246,242,236,.85); background: rgba(33,29,25,.28); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); color: #fdfbf7; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0; transform: translateY(0) scale(.94); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.34,1.36,.42,1); pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px;">
+            <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 21px; line-height: 1.25;">{{ item.name }}</span>
+            <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">{{ item.price }}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <sc-for list="{{ item.swatches }}" as="swatch" hint-placeholder-count="4">
+              <span style="{{ swatch.style }}"></span>
+            </sc-for>
+            <span style="margin-left: 6px; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #8f877d;">{{ item.fabrics }}</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; justify-content: center; padding-bottom: 100px;">
+      <button onClick="{{ loadMore }}" style="border: 1px solid rgba(43,38,33,.28); background: none; cursor: pointer; padding: 18px 42px; font-family: inherit; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #2b2621; transition: background .45s cubic-bezier(.2,.7,.2,1), color .45s ease, border-color .45s ease, letter-spacing .45s ease;" style-hover="background: #2b2621; color: #f4f1ec; border-color: #2b2621; letter-spacing: 0.23em;" style-active="transform: scale(.98);">{{ moreLabel }}</button>
+    </div>
+  </section>
+
+  <section data-screen-label="Контакты" style="background: #211d19; color: #ece7df; padding: clamp(70px, 12vh, 118px) clamp(20px, 4vw, 56px) 44px;">
+    <div style="display: grid; grid-template-columns: 1.6fr 1fr 1.1fr; gap: 48px;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; color: #f4efe7;">Mebelissimo</div>
+        <p data-ro="Ne specializăm în producerea mobilei la comandă: bucătării, dulapuri glisante, holuri, camere pentru copii, sufragerii, dormitoare, birouri etc." style="margin: 0; max-width: 38ch; font-weight: 300; font-size: 14px; line-height: 1.75; color: #a9a096;">Мы специализируемся на изготовлении мебели по индивидуальным проектам: кухни, шкафы-купе, прихожие, детские комнаты, гостиные, спальни, кабинеты и т.д.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;" data-ro="Catalog">Каталог</div>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Paturi">Кровати</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Paturi pentru copii">Кровати детские</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Canapele">Диваны</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;" data-ro="Contacte">Контакты</div>
+        <a style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #f4efe7; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">+(373)&nbsp;6-90-38-380</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease;" style-hover="color: #d3b291;">mebelissimo@mail.ru</a>
+      </div>
+    </div>
+    <div style="margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(236,231,223,.14); display: flex; align-items: center; justify-content: space-between; gap: 32px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #7d7469;">
+      <span>Mebelissimo © 2026</span>
+      <span>Chișinău, Moldova</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { filter: 'Все', sort: 0, shown: 9 };
+  cartRef = React.createRef();
+  ruRef = React.createRef();
+  roRef = React.createRef();
+  knobRef = React.createRef();
+  langRef = React.createRef();
+
+  componentDidMount() {
+    this.onWinResize = () => { this.lockLabelWidths(); this.moveKnob(this.lang || 'ru'); };
+    requestAnimationFrame(() => { this.lockLabelWidths(); this.moveKnob('ru'); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.onWinResize);
+    this.onLogoScroll = () => this.syncLogo();
+    window.addEventListener('scroll', this.onLogoScroll, { passive: true });
+    this.syncLogo();
+    window.addEventListener('resize', this.onWinResize);
+    this.bindCards();
+  }
+
+  componentDidUpdate() {
+    this.bindCards();
+  }
+
+  bindCards() {
+    document.querySelectorAll('[data-shop-card]').forEach(card => {
+      if (card.dataset.bound) return;
+      card.dataset.bound = '1';
+      const b = card.querySelector('[data-cart-btn]');
+      if (!b) return;
+      card.addEventListener('mouseenter', () => { b.style.opacity = '1'; b.style.transform = 'translateY(0) scale(1)'; });
+      card.addEventListener('mouseleave', () => { b.style.opacity = '0'; b.style.transform = 'translateY(0) scale(.94)'; });
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onWinResize);
+  }
+
+  logoRef = React.createRef();
+  wordRef = React.createRef();
+  markRef = React.createRef();
+
+  syncLogo() {
+    const w = this.wordRef.current, m = this.markRef.current;
+    if (!w || !m) return;
+    const on = (window.scrollY || document.documentElement.scrollTop) > 48;
+    m.style.opacity = on ? '0' : '1';
+    m.style.transform = on ? 'translate(-50%, -50%) translateX(-40px) translateY(-20px)' : 'translate(-50%, -50%) translateX(-40px)';
+    m.style.transitionDelay = on ? '0s' : '.3s';
+    w.style.opacity = on ? '1' : '0';
+    w.style.transform = on ? 'translate(-50%, -50%) translateX(-40px)' : 'translate(-50%, -50%) translateX(-40px) translateY(14px)';
+    w.style.transitionDelay = on ? '.3s' : '0s';
+  }
+
+  lockLabelWidths() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    header.querySelectorAll('[data-ro]').forEach(el => {
+      const ru = el.textContent;
+      const w1 = el.getBoundingClientRect().width;
+      el.textContent = el.dataset.ro;
+      const w2 = el.getBoundingClientRect().width;
+      el.textContent = ru;
+      el.style.display = 'inline-block';
+      el.style.textAlign = 'center';
+      el.style.minWidth = Math.ceil(Math.max(w1, w2)) + 'px';
+    });
+  }
+
+  moveKnob(lang) {
+    const knob = this.knobRef.current;
+    const target = lang === 'ro' ? this.roRef.current : this.ruRef.current;
+    if (!knob || !target) return;
+    knob.style.left = target.offsetLeft + 'px';
+    knob.style.top = target.offsetTop + 'px';
+    knob.style.width = target.offsetWidth + 'px';
+    knob.style.height = target.offsetHeight + 'px';
+    knob.style.transform = 'scale(1.16, .82)';
+    clearTimeout(this.knobT);
+    this.knobT = setTimeout(() => { knob.style.transform = 'scale(1, 1)'; }, 200);
+    if (this.ruRef.current) this.ruRef.current.style.color = lang === 'ro' ? '#8f877d' : '#f4f1ec';
+    if (this.roRef.current) this.roRef.current.style.color = lang === 'ro' ? '#f4f1ec' : '#8f877d';
+  }
+
+  setLang(lang) {
+    this.lang = lang;
+    document.querySelectorAll('[data-ro]').forEach(el => {
+      if (!el.dataset.ru) el.dataset.ru = el.textContent;
+      el.textContent = lang === 'ro' ? el.dataset.ro : el.dataset.ru;
+    });
+    this.moveKnob(lang);
+    this.forceUpdate();
+  }
+
+  catalog = [
+    { name: 'Кровать Luna', price: '15 300 mdl', num: 15300, tag: 'Двуспальная', cat: 'Двуспальные', fabrics: '6 тканей', swatches: ['#b9a790', '#8a6a4b', '#4a5750', '#2b2621'] },
+    { name: 'Кровать Terry', price: '10 800 mdl', num: 10800, tag: 'Односпальная', cat: 'Односпальные', fabrics: '5 тканей', swatches: ['#d5c7b4', '#9c8f7d', '#6a5a48'] },
+    { name: 'Кровать Adeli', price: '11 700 mdl', num: 11700, tag: 'Двуспальная', cat: 'Двуспальные', fabrics: '7 тканей', swatches: ['#c9b9a4', '#7f6f5c', '#3b4a44', '#241f1b'] },
+    { name: 'Кровать Aurelia', price: '12 500 mdl', num: 12500, tag: 'С подъёмным механизмом', cat: 'С подъёмным механизмом', fabrics: '6 тканей', swatches: ['#e0d4c2', '#a98f72', '#5d5347'] },
+    { name: 'Кровать Barocco', price: '16 100 mdl', num: 16100, tag: 'Двуспальная', cat: 'Двуспальные', fabrics: '8 тканей', swatches: ['#cbb79c', '#8a6a4b', '#413a33', '#7a8b83'] },
+    { name: 'Кровать Estel', price: '16 500 mdl', num: 16500, tag: 'С подъёмным механизмом', cat: 'С подъёмным механизмом', fabrics: '6 тканей', swatches: ['#d8ccbb', '#96825f', '#2f2a25'] },
+    { name: 'Кровать Vero', price: '13 400 mdl', num: 13400, tag: 'Двуспальная', cat: 'Двуспальные', fabrics: '5 тканей', swatches: ['#c4b49c', '#7d6a55', '#39332c'] },
+    { name: 'Кровать Mia', price: '9 700 mdl', num: 9700, tag: 'Детская', cat: 'Детские', fabrics: '9 тканей', swatches: ['#e6dccb', '#b7c4bd', '#8a6a4b'] },
+    { name: 'Кровать Nord', price: '14 200 mdl', num: 14200, tag: 'Односпальная', cat: 'Односпальные', fabrics: '4 ткани', swatches: ['#cfc3b1', '#6f6252', '#292420'] },
+    { name: 'Кровать Siena', price: '17 900 mdl', num: 17900, tag: 'Двуспальная', cat: 'Двуспальные', fabrics: '7 тканей', swatches: ['#d9cab3', '#a4855f', '#4c4238'] },
+    { name: 'Кровать Bruno', price: '12 900 mdl', num: 12900, tag: 'С подъёмным механизмом', cat: 'С подъёмным механизмом', fabrics: '5 тканей', swatches: ['#c2b6a5', '#7b6c58', '#332e28'] },
+    { name: 'Кровать Alba', price: '10 200 mdl', num: 10200, tag: 'Детская', cat: 'Детские', fabrics: '8 тканей', swatches: ['#eee5d6', '#c6b49a', '#8a6a4b'] }
+  ];
+
+  tabs = ['Все', 'Двуспальные', 'Односпальные', 'С подъёмным механизмом', 'Детские'];
+  tabsRo = ['Toate', 'Duble', 'Simple', 'Cu mecanism de ridicare', 'Pentru copii'];
+  sorts = ['по популярности', 'сначала дешевле', 'сначала дороже'];
+  sortsRo = ['după popularitate', 'mai ieftine întâi', 'mai scumpe întâi'];
+  tagRo = { 'Двуспальная': 'Dublu', 'Односпальная': 'Simplu', 'С подъёмным механизмом': 'Cu mecanism de ridicare', 'Детская': 'Pentru copii' };
+
+
+  renderVals() {
+    const st = this.state;
+    const ro = this.lang === 'ro';
+    const filters = this.tabs.map((label, i) => {
+      const on = label === st.filter;
+      return {
+        label: ro ? this.tabsRo[i] : label,
+        bg: on ? '#2b2621' : 'transparent',
+        fg: on ? '#f4f1ec' : '#4a443d',
+        border: on ? '#2b2621' : 'rgba(43,38,33,.22)',
+        onClick: () => this.setState({ filter: label, shown: 9 })
+      };
+    });
+
+    let list = this.catalog.filter(p => st.filter === 'Все' || p.cat === st.filter);
+    if (st.sort === 1) list = list.slice().sort((a, b) => a.num - b.num);
+    if (st.sort === 2) list = list.slice().sort((a, b) => b.num - a.num);
+
+    const items = list.slice(0, st.shown).map((p, i) => ({
+      name: ro ? p.name.replace('Кровать', 'Patul') : p.name,
+      price: p.price,
+      tag: ro ? (this.tagRo[p.tag] || p.tag) : p.tag,
+      fabrics: ro ? p.fabrics.replace(/тканей|ткани/, 'textile') : p.fabrics,
+      slot: 'shop-' + p.name.replace(/\s+/g, '-').toLowerCase(),
+      href: 'http://mebelissimo.md/Beds',
+      swatches: p.swatches.map(c => ({ style: 'display: block; width: 13px; height: 13px; border-radius: 999px; background: ' + c + '; box-shadow: inset 0 0 0 1px rgba(43,38,33,.14)' }))
+    }));
+
+    const rest = list.length - items.length;
+    return {
+      logoRef: this.logoRef,
+      wordRef: this.wordRef,
+      markRef: this.markRef,
+      cartRef: this.cartRef,
+      ruRef: this.ruRef,
+      roRef: this.roRef,
+      knobRef: this.knobRef,
+      langRef: this.langRef,
+      setRu: () => this.setLang('ru'),
+      setRo: () => this.setLang('ro'),
+      filters,
+      items,
+      sortLabel: ro ? this.sortsRo[st.sort] : this.sorts[st.sort],
+      sortWord: ro ? 'Sortare' : 'Сортировка',
+      countLabel: ro ? '43 modele' : '43 модели',
+      toggleSort: () => this.setState(s => ({ sort: (s.sort + 1) % 3 })),
+      moreLabel: rest > 0 ? (ro ? 'Arătați încă ' + Math.min(6, rest) : 'Показать ещё ' + Math.min(6, rest)) : (ro ? 'Toate modelele sunt afișate' : 'Показаны все модели'),
+      loadMore: () => { if (rest > 0) this.setState(s => ({ shown: s.shown + 6 })); }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Хендофф из Claude Design — референс, а не исходники проекта.
+    "design/**",
   ]),
 ]);
 

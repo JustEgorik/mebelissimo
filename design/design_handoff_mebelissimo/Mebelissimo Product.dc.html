@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  html { background: #e9e4dc; }
+  body { margin: 0; background: #e9e4dc; color: #2b2621; font-family: 'Manrope', Helvetica, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #2b2621; text-decoration: none; }
+  a:hover { color: #8a6a4b; }
+  @keyframes mb-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes mb-fade { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</helmet>
+<div style="position: relative; background: #e9e4dc; min-height: 100vh;">
+
+  <header style="position: sticky; top: 0; z-index: 60; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(12px, 2vw, 32px); padding: 26px clamp(20px, 4vw, 56px); background: rgba(233,228,220,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(43,38,33,.1);">
+    <a href="./Mebelissimo Home.dc.html" ref="{{ logoRef }}" style="position: relative; min-width: 0; display: block; width: clamp(180px, 18vw, 252px); height: clamp(34px, 3.6vw, 48px); color: #2b2621; cursor: pointer; transition: color .45s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b;">
+      <span ref="{{ markRef }}" aria-label="Mebelissimo" style="position: absolute; left: 50%; top: 50%; width: clamp(49px, 5.23vw, 70px); height: clamp(34px, 3.6vw, 48px); display: block; background: currentColor; -webkit-mask-image: url('./mebelissimo-mark.svg'); mask-image: url('./mebelissimo-mark.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; transform: translate(-50%, -50%) translateX(-40px); transition: opacity .5s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);"></span>
+      <span ref="{{ wordRef }}" aria-label="Mebelissimo" style="position: absolute; left: 50%; top: 50%; width: clamp(118px, 11.76vw, 155px); height: clamp(17.3px, 1.73vw, 22.7px); display: block; background: currentColor; -webkit-mask-image: url('./mebelissimo-word.svg'); mask-image: url('./mebelissimo-word.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; opacity: 0; transform: translate(-50%, -50%) translateX(-40px) translateY(14px); transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);"></span>
+    </a>
+    <nav style="display: flex; gap: clamp(14px, 2.2vw, 34px); font-size: clamp(12px, 1.15vw, 14px); letter-spacing: 0.11em; text-transform: uppercase; font-weight: 400; color: #4a443d; white-space: nowrap;">
+      <a href="./Mebelissimo Shop.dc.html" data-ro="Magazin" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Магазин</a>
+      <a data-ro="Designerilor" style="color: inherit; display: inline-block; cursor: pointer; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Дизайнерам</a>
+      <a data-ro="Contacte" style="color: inherit; display: inline-block; cursor: pointer; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Контакты</a>
+    </nav>
+    <div style="display: flex; align-items: center; justify-content: flex-end; min-width: 0; gap: 10px;">
+      <div ref="{{ langRef }}" style="position: relative; display: flex; align-items: center; gap: 2px; padding: 4px; font-size: 11px; letter-spacing: 0.14em;">
+        <span ref="{{ knobRef }}" style="position: absolute; top: 4px; left: 4px; width: 34px; height: 23px; border-radius: 999px; background: #2b2621; transition: left .55s cubic-bezier(.34,1.42,.42,1), width .55s cubic-bezier(.34,1.42,.42,1), transform .55s cubic-bezier(.34,1.42,.42,1); pointer-events: none;"></span>
+        <span ref="{{ ruRef }}" onClick="{{ setRu }}" style="position: relative; padding: 5px 11px; cursor: pointer; color: #f4f1ec; transition: color .45s ease;">RU</span>
+        <span ref="{{ roRef }}" onClick="{{ setRo }}" style="position: relative; padding: 5px 11px; cursor: pointer; color: #8f877d; transition: color .45s ease;">RO</span>
+      </div>
+      <a href="./Mebelissimo Cart.dc.html" style="color: #4a443d; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; font-size: clamp(12px, 1.15vw, 14px); letter-spacing: 0.05em; padding-left: clamp(10px, 1.4vw, 20px); border-left: 1px solid rgba(43,38,33,.18); transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.08em;"><span data-ro="Coș">Корзина</span><span style="display: inline-flex; align-items: center; justify-content: center; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px; background: #8a6a4b; color: #fdfbf7; font-size: 10.5px; letter-spacing: 0;">1</span></a>
+    </div>
+  </header>
+
+  <section data-screen-label="Товар" style="padding: clamp(30px, 5vh, 54px) clamp(20px, 4vw, 56px) 0;">
+    <div style="display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d; animation: mb-fade 1s ease .05s both;">
+      <a href="./Mebelissimo Home.dc.html" data-ro="Prima pagină" style="color: inherit;">Главная</a><span>/</span><a href="./Mebelissimo Shop.dc.html" data-ro="Paturi" style="color: inherit;">Кровати</a><span>/</span><span style="color: #2b2621;">Luna</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr); gap: clamp(30px, 4vw, 72px); align-items: start; padding: 34px 0 clamp(70px, 10vh, 110px);">
+
+      <div style="display: flex; flex-direction: column; gap: 14px; animation: mb-rise .9s cubic-bezier(.2,.7,.2,1) .08s both;">
+        <div style="position: relative; aspect-ratio: 4 / 3; background: #ded7cd; overflow: hidden;">
+          <image-slot id="prod-luna-main" shape="rect" placeholder="главное фото кровати"></image-slot>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+          <div style="position: relative; aspect-ratio: 1; background: #ded7cd; overflow: hidden; cursor: pointer; transition: opacity .45s ease;" style-hover="opacity: .84;"><image-slot id="prod-luna-2" shape="rect" placeholder="фото 2"></image-slot></div>
+          <div style="position: relative; aspect-ratio: 1; background: #ded7cd; overflow: hidden; cursor: pointer; transition: opacity .45s ease;" style-hover="opacity: .84;"><image-slot id="prod-luna-3" shape="rect" placeholder="фото 3"></image-slot></div>
+          <div style="position: relative; aspect-ratio: 1; background: #ded7cd; overflow: hidden; cursor: pointer; transition: opacity .45s ease;" style-hover="opacity: .84;"><image-slot id="prod-luna-4" shape="rect" placeholder="фото 4"></image-slot></div>
+          <div style="position: relative; aspect-ratio: 1; background: #ded7cd; overflow: hidden; cursor: pointer; transition: opacity .45s ease;" style-hover="opacity: .84;"><image-slot id="prod-luna-5" shape="rect" placeholder="фото 5"></image-slot></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 26px; animation: mb-rise .95s cubic-bezier(.2,.7,.2,1) .18s both;">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <span data-ro="Dublu" style="font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8a6a4b;">Двуспальная</span>
+          <h1 data-ro="Patul Luna" style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(34px, 4vw, 58px); line-height: 1.02;">Кровать Luna</h1>
+          <span style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.3vw, 32px);">{{ priceLabel }}</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 22px; padding: 22px 0; border-top: 1px solid rgba(43,38,33,.12); border-bottom: 1px solid rgba(43,38,33,.12); font-size: 13px; color: #4a443d;">
+          <span data-ro="Producător" style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">Производитель</span><span>Mebelissimo</span>
+          <span data-ro="Model" style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">Модель</span><span>Luna</span>
+          <span data-ro="Disponibilitate" style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">Наличие</span><span data-ro="Precomandă">Предзаказ</span>
+          <span data-ro="Producere" style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">Изготовление</span><span data-ro="20–30 de zile">20–30 дней</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <span data-ro="Dimensiune" style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">Размер</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <sc-for list="{{ sizes }}" as="size" hint-placeholder-count="3">
+              <button onClick="{{ size.onClick }}" style="border: 1px solid {{ size.border }}; background: {{ size.bg }}; color: {{ size.fg }}; cursor: pointer; padding: 12px 20px; font-family: inherit; font-size: 12px; letter-spacing: 0.1em; transition: background .4s ease, color .4s ease, border-color .4s ease;">{{ size.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <span style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">{{ fabricLabel }}</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <sc-for list="{{ fabrics }}" as="fabric" hint-placeholder-count="6">
+              <button onClick="{{ fabric.onClick }}" title="{{ fabric.name }}" aria-label="{{ fabric.name }}" style="width: 34px; height: 34px; border-radius: 999px; cursor: pointer; padding: 0; background: {{ fabric.color }}; border: 1px solid rgba(43,38,33,.16); box-shadow: {{ fabric.ring }}; transition: box-shadow .4s ease, transform .4s cubic-bezier(.2,.7,.2,1);"></button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: stretch; gap: 14px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; border: 1px solid rgba(43,38,33,.2);">
+            <button onClick="{{ dec }}" style="width: 46px; height: 56px; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 16px; color: #4a443d; transition: background .35s ease;" style-hover="background: rgba(43,38,33,.07);">−</button>
+            <span style="min-width: 34px; text-align: center; font-size: 14px;">{{ qty }}</span>
+            <button onClick="{{ inc }}" style="width: 46px; height: 56px; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 16px; color: #4a443d; transition: background .35s ease;" style-hover="background: rgba(43,38,33,.07);">+</button>
+          </div>
+          <button onClick="{{ addToCart }}" style="flex: 1 1 220px; border: 0; background: #2b2621; color: #f4f1ec; cursor: pointer; padding: 19px 30px; font-family: inherit; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; transition: background .5s cubic-bezier(.2,.7,.2,1), letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="background: #8a6a4b; letter-spacing: 0.23em;">{{ cartLabel }}</button>
+        </div>
+
+        <p data-ro="Modelul se produce la dimensiunile dumneavoastră. Tapiseria, culoarea și baza — la alegere; mostrele de textile le aducem acasă." style="margin: 0; font-weight: 300; font-size: 14px; line-height: 1.8; color: #5b544c;">Модель изготавливается по вашим размерам. Обивка, цвет и основание — на выбор; образцы тканей привозим домой.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Описание" style="padding: 0 clamp(20px, 4vw, 56px) clamp(60px, 9vh, 96px);">
+    <div style="display: flex; gap: 34px; border-bottom: 1px solid rgba(43,38,33,.12);">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="2">
+        <button onClick="{{ tab.onClick }}" style="border: 0; border-bottom: 2px solid {{ tab.line }}; background: none; padding: 0 0 16px; cursor: pointer; font-family: inherit; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: {{ tab.color }}; transition: color .4s ease, border-color .4s ease;">{{ tab.label }}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ showDescription }}" hint-placeholder-val="{{ true }}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; padding-top: 40px;">
+        <p data-ro="Patul Luna are un tăblie moale, capitonată, cu linii curate. Carcasa este din lemn masiv, baza cu lamele din fag." style="margin: 0; font-weight: 300; font-size: 15px; line-height: 1.85; color: #4a443d;">Кровать Luna — мягкое стёганое изголовье со спокойной геометрией. Каркас из массива, основание на буковых ламелях.</p>
+        <p data-ro="Opțional: mecanism de ridicare cu ladă pentru lenjerie, picioare din lemn sau metal, tapiserie din catifea, in sau șenil." style="margin: 0; font-weight: 300; font-size: 15px; line-height: 1.85; color: #4a443d;">Опционально: подъёмный механизм с бельевым ящиком, ножки из дерева или металла, обивка велюром, льном или шениллом.</p>
+        <p data-ro="Livrarea în Chișinău — gratuit la comenzi de la 20 000 mdl. Asamblarea și instalarea la domiciliu sunt incluse." style="margin: 0; font-weight: 300; font-size: 15px; line-height: 1.85; color: #4a443d;">Доставка по Кишинёву — бесплатно при заказе от 20 000 mdl. Сборка и установка на месте включены.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showReviews }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 26px; padding-top: 40px; max-width: 60ch;">
+        <p data-ro="Încă nu sunt recenzii pentru acest model." style="margin: 0; font-weight: 300; font-size: 15px; line-height: 1.8; color: #4a443d;">Отзывов об этой модели пока нет.</p>
+        <button data-ro="Scrieți o recenzie" style="align-self: flex-start; border: 1px solid rgba(43,38,33,.28); background: none; cursor: pointer; padding: 16px 32px; font-family: inherit; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #2b2621; transition: background .45s ease, color .45s ease, border-color .45s ease, letter-spacing .45s ease;" style-hover="background: #2b2621; color: #f4f1ec; border-color: #2b2621; letter-spacing: 0.23em;">Написать отзыв</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <section data-screen-label="Условия" style="background: #f7f4ef; padding: clamp(56px, 9vh, 90px) clamp(20px, 4vw, 56px);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span data-ro="Plata" style="font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8a6a4b;">Оплата</span>
+        <p data-ro="Plata se face după confirmarea comenzii." style="margin: 0; font-weight: 300; font-size: 14px; line-height: 1.8; color: #4a443d;">Оплата производится после подтверждения заказа.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span data-ro="Credit" style="font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8a6a4b;">Кредит</span>
+        <p data-ro="În rate prin partenerii noștri: MAIB, Easy Credit." style="margin: 0; font-weight: 300; font-size: 14px; line-height: 1.8; color: #4a443d;">В рассрочку через партнёров: MAIB, Easy Credit.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span data-ro="Livrare" style="font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8a6a4b;">Доставка</span>
+        <p data-ro="Livrăm în toată Moldova." style="margin: 0; font-weight: 300; font-size: 14px; line-height: 1.8; color: #4a443d;">Доставка осуществляется по Молдове.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span data-ro="Instalare" style="font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8a6a4b;">Установка</span>
+        <p data-ro="Asamblarea și instalarea mobilei la domiciliu." style="margin: 0; font-weight: 300; font-size: 14px; line-height: 1.8; color: #4a443d;">Сборка и установка мебели на месте.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Похожие" style="padding: clamp(60px, 10vh, 100px) clamp(20px, 4vw, 56px) clamp(70px, 11vh, 110px);">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; flex-wrap: wrap; padding-bottom: 34px; border-bottom: 1px solid rgba(43,38,33,.12);">
+      <h2 data-ro="Modele similare" style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(28px, 3vw, 46px); line-height: 1;">Похожие модели</h2>
+      <a href="./Mebelissimo Shop.dc.html" data-ro="Tot catalogul →" style="font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #5b544c; border-bottom: 1px solid rgba(43,38,33,.24); padding-bottom: 5px; transition: color .4s ease, border-color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; border-color: #8a6a4b; letter-spacing: 0.21em;">Весь каталог →</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 44px 30px; padding-top: 44px;">
+      <sc-for list="{{ related }}" as="item" hint-placeholder-count="4">
+        <a data-rel-card="1" style="display: flex; flex-direction: column; gap: 14px; cursor: pointer;">
+          <div style="position: relative; aspect-ratio: 4 / 5; background: #ded7cd; overflow: hidden;">
+            <image-slot id="{{ item.slot }}" shape="rect" placeholder="фото"></image-slot>
+            <span data-cart-btn="1" style="position: absolute; left: 50%; top: 50%; margin-left: -84px; margin-top: -23px; width: 168px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 9px; padding: 15px 0; border: 1px solid rgba(246,242,236,.85); background: rgba(33,29,25,.28); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); color: #fdfbf7; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0; transform: translateY(0) scale(.94); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.34,1.36,.42,1); pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 19px;">{{ item.name }}</span>
+            <span style="white-space: nowrap; font-size: 12.5px; color: #5b544c;">{{ item.price }}</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="Контакты" style="background: #211d19; color: #ece7df; padding: clamp(70px, 12vh, 118px) clamp(20px, 4vw, 56px) 44px;">
+    <div style="display: grid; grid-template-columns: 1.6fr 1fr 1.1fr; gap: 48px;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; color: #f4efe7;">Mebelissimo</div>
+        <p data-ro="Ne specializăm în producerea mobilei la comandă: bucătării, dulapuri glisante, holuri, camere pentru copii, sufragerii, dormitoare, birouri etc." style="margin: 0; max-width: 38ch; font-weight: 300; font-size: 14px; line-height: 1.75; color: #a9a096;">Мы специализируемся на изготовлении мебели по индивидуальным проектам: кухни, шкафы-купе, прихожие, детские комнаты, гостиные, спальни, кабинеты и т.д.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div data-ro="Catalog" style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;">Каталог</div>
+        <a href="./Mebelissimo Shop.dc.html" data-ro="Paturi" style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">Кровати</a>
+        <a data-ro="Paturi pentru copii" style="font-size: 14px; cursor: pointer; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">Кровати детские</a>
+        <a data-ro="Canapele" style="font-size: 14px; cursor: pointer; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">Диваны</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div data-ro="Contacte" style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;">Контакты</div>
+        <a style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; cursor: pointer; color: #f4efe7; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">+(373)&nbsp;6-90-38-380</a>
+        <a style="font-size: 14px; cursor: pointer; color: #ded7cd; transition: color .4s ease;" style-hover="color: #d3b291;">mebelissimo@mail.ru</a>
+      </div>
+    </div>
+    <div style="margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(236,231,223,.14); display: flex; align-items: center; justify-content: space-between; gap: 32px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #7d7469;">
+      <span>Mebelissimo © 2026</span>
+      <span>Chișinău, Moldova</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { qty: 1, size: 1, fabric: 0, tab: 0, added: false };
+
+  logoRef = React.createRef();
+  markRef = React.createRef();
+  wordRef = React.createRef();
+  ruRef = React.createRef();
+  roRef = React.createRef();
+  knobRef = React.createRef();
+  langRef = React.createRef();
+
+  sizeList = [
+    { label: '140 × 200', add: 0 },
+    { label: '160 × 200', add: 0 },
+    { label: '180 × 200', add: 1400 }
+  ];
+
+  fabricList = [
+    { name: 'Велюр, беж', color: '#cbb79c' },
+    { name: 'Лён, песок', color: '#d9cab3' },
+    { name: 'Шенилл, орех', color: '#8a6a4b' },
+    { name: 'Велюр, олива', color: '#6f7a63' },
+    { name: 'Рогожка, серый', color: '#9a978f' },
+    { name: 'Шенилл, графит', color: '#3b3630' }
+  ];
+
+  relatedList = [
+    { name: 'Кровать Adeli', nameRo: 'Patul Adeli', price: '11 700 mdl', slot: 'prod-rel-1' },
+    { name: 'Кровать Barocco', nameRo: 'Patul Barocco', price: '16 100 mdl', slot: 'prod-rel-2' },
+    { name: 'Кровать Siena', nameRo: 'Patul Siena', price: '17 900 mdl', slot: 'prod-rel-3' },
+    { name: 'Кровать Vero', nameRo: 'Patul Vero', price: '13 400 mdl', slot: 'prod-rel-4' }
+  ];
+
+  componentDidMount() {
+    this.onScroll = () => this.syncLogo();
+    this.onResize = () => { this.lockLabelWidths(); this.moveKnob(this.lang || 'ru'); };
+    requestAnimationFrame(() => { this.lockLabelWidths(); this.moveKnob('ru'); this.syncLogo(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.bindCards();
+  }
+
+  componentDidUpdate() {
+    this.bindCards();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  bindCards() {
+    document.querySelectorAll('[data-rel-card]').forEach(card => {
+      if (card.dataset.bound) return;
+      card.dataset.bound = '1';
+      const b = card.querySelector('[data-cart-btn]');
+      if (!b) return;
+      card.addEventListener('mouseenter', () => { b.style.opacity = '1'; b.style.transform = 'translateY(0) scale(1)'; });
+      card.addEventListener('mouseleave', () => { b.style.opacity = '0'; b.style.transform = 'translateY(0) scale(.94)'; });
+    });
+  }
+
+  syncLogo() {
+    const w = this.wordRef.current, m = this.markRef.current;
+    if (!w || !m) return;
+    const on = (window.scrollY || document.documentElement.scrollTop) > 48;
+    m.style.opacity = on ? '0' : '1';
+    m.style.transform = on ? 'translate(-50%, -50%) translateX(-40px) translateY(-20px)' : 'translate(-50%, -50%) translateX(-40px)';
+    m.style.transitionDelay = on ? '0s' : '.3s';
+    w.style.opacity = on ? '1' : '0';
+    w.style.transform = on ? 'translate(-50%, -50%) translateX(-40px)' : 'translate(-50%, -50%) translateX(-40px) translateY(14px)';
+    w.style.transitionDelay = on ? '.3s' : '0s';
+  }
+
+  lockLabelWidths() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    header.querySelectorAll('[data-ro]').forEach(el => {
+      const ru = el.textContent;
+      const w1 = el.getBoundingClientRect().width;
+      el.textContent = el.dataset.ro;
+      const w2 = el.getBoundingClientRect().width;
+      el.textContent = ru;
+      el.style.display = 'inline-block';
+      el.style.textAlign = 'center';
+      el.style.minWidth = Math.ceil(Math.max(w1, w2)) + 'px';
+    });
+  }
+
+  moveKnob(lang) {
+    const knob = this.knobRef.current;
+    const target = lang === 'ro' ? this.roRef.current : this.ruRef.current;
+    if (!knob || !target) return;
+    knob.style.left = target.offsetLeft + 'px';
+    knob.style.top = target.offsetTop + 'px';
+    knob.style.width = target.offsetWidth + 'px';
+    knob.style.height = target.offsetHeight + 'px';
+    knob.style.transform = 'scale(1.16, .82)';
+    clearTimeout(this.knobT);
+    this.knobT = setTimeout(() => { knob.style.transform = 'scale(1, 1)'; }, 200);
+    if (this.ruRef.current) this.ruRef.current.style.color = lang === 'ro' ? '#8f877d' : '#f4f1ec';
+    if (this.roRef.current) this.roRef.current.style.color = lang === 'ro' ? '#f4f1ec' : '#8f877d';
+  }
+
+  setLang(lang) {
+    this.lang = lang;
+    document.querySelectorAll('[data-ro]').forEach(el => {
+      if (!el.dataset.ru) el.dataset.ru = el.textContent;
+      el.textContent = lang === 'ro' ? el.dataset.ro : el.dataset.ru;
+    });
+    this.moveKnob(lang);
+    this.forceUpdate();
+  }
+
+  renderVals() {
+    const ro = this.lang === 'ro';
+    const st = this.state;
+    const base = 15300 + this.sizeList[st.size].add;
+    const total = base * st.qty;
+
+    return {
+      logoRef: this.logoRef,
+      markRef: this.markRef,
+      wordRef: this.wordRef,
+      langRef: this.langRef,
+      knobRef: this.knobRef,
+      ruRef: this.ruRef,
+      roRef: this.roRef,
+      setRu: () => this.setLang('ru'),
+      setRo: () => this.setLang('ro'),
+
+      priceLabel: total.toLocaleString('ru-RU').replace(/\u00a0/g, ' ') + ' mdl',
+      qty: st.qty,
+      inc: () => this.setState(s => ({ qty: s.qty + 1, added: false })),
+      dec: () => this.setState(s => ({ qty: Math.max(1, s.qty - 1), added: false })),
+      addToCart: () => this.setState({ added: true }),
+      cartLabel: st.added ? (ro ? 'Adăugat în coș' : 'Добавлено в корзину') : (ro ? 'Adaugă în coș' : 'В корзину'),
+
+      sizes: this.sizeList.map((s, i) => ({
+        label: s.label,
+        bg: i === st.size ? '#2b2621' : 'transparent',
+        fg: i === st.size ? '#f4f1ec' : '#4a443d',
+        border: i === st.size ? '#2b2621' : 'rgba(43,38,33,.22)',
+        onClick: () => this.setState({ size: i, added: false })
+      })),
+
+      fabricLabel: (ro ? 'Tapiserie' : 'Обивка') + ' — ' + this.fabricList[st.fabric].name,
+      fabrics: this.fabricList.map((f, i) => ({
+        name: f.name,
+        color: f.color,
+        ring: i === st.fabric ? '0 0 0 2px #e9e4dc, 0 0 0 3px #2b2621' : 'none',
+        onClick: () => this.setState({ fabric: i })
+      })),
+
+      tabs: [ro ? 'Descriere' : 'Описание', ro ? 'Recenzii (0)' : 'Отзывы (0)'].map((label, i) => ({
+        label,
+        color: i === st.tab ? '#2b2621' : '#8f877d',
+        line: i === st.tab ? '#2b2621' : 'transparent',
+        onClick: () => this.setState({ tab: i })
+      })),
+      showDescription: st.tab === 0,
+      showReviews: st.tab === 1,
+
+      related: this.relatedList.map(r => ({ name: ro ? r.nameRo : r.name, price: r.price, slot: r.slot }))
+    };
+  }
+}
+</script>
+</body>
+</html>

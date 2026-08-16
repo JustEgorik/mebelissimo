@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  html { background: #e9e4dc; }
+  body { margin: 0; background: #e9e4dc; color: #2b2621; font-family: 'Manrope', Helvetica, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #2b2621; text-decoration: none; }
+  a:hover { color: #8a6a4b; }
+  @keyframes mb-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes mb-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes mb-line { 0% { transform: scaleY(0); transform-origin: top; } 45% { transform: scaleY(1); transform-origin: top; } 55% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+  @keyframes mb-drift { from { transform: translateX(0); } to { transform: translateX(-9%); } }
+</style>
+</helmet>
+<div style="position: relative; background: #e9e4dc;">
+
+  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(12px, 2vw, 32px); padding: 26px clamp(20px, 4vw, 56px); animation: mb-fade 1.2s ease .1s both;">
+    <a ref="{{ logoRef }}" style="position: relative; min-width: 0; display: block; width: clamp(180px, 18vw, 252px); height: clamp(34px, 3.6vw, 48px); color: #2b2621; cursor: pointer; transition: color .45s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b;">
+      <span ref="{{ markRef }}" aria-label="Mebelissimo" style="position: absolute; left: 50%; top: 50%; width: clamp(49px, 5.23vw, 70px); height: clamp(34px, 3.6vw, 48px); display: block; background: currentColor; -webkit-mask-image: url('./mebelissimo-mark.svg'); mask-image: url('./mebelissimo-mark.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; transform: translate(-50%, -50%) translateX(-40px); transition: opacity .5s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);"></span>
+      <span ref="{{ wordRef }}" aria-label="Mebelissimo" style="position: absolute; left: 50%; top: 50%; width: clamp(118px, 11.76vw, 155px); height: clamp(17.3px, 1.73vw, 22.7px); display: block; background: currentColor; -webkit-mask-image: url('./mebelissimo-word.svg'); mask-image: url('./mebelissimo-word.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; opacity: 0; transform: translate(-50%, -50%) translateX(-40px) translateY(14px); transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);"></span>
+    </a>
+    <nav style="display: flex; gap: clamp(14px, 2.2vw, 34px); font-size: clamp(12px, 1.15vw, 14px); letter-spacing: 0.11em; text-transform: uppercase; font-weight: 400; color: #4a443d; white-space: nowrap;">
+      <a href="./Mebelissimo Shop.dc.html" data-ro="Magazin" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Магазин</a>
+      <a data-ro="Designerilor" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1); cursor: pointer;" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Дизайнерам</a>
+      <a data-ro="Contacte" style="color: inherit; display: inline-block; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1); cursor: pointer;" style-hover="color: #8a6a4b; letter-spacing: 0.14em;">Контакты</a>
+    </nav>
+    <div style="display: flex; align-items: center; justify-content: flex-end; min-width: 0; gap: 10px;">
+      <div ref="{{ langRef }}" style="position: relative; display: flex; align-items: center; gap: 2px; padding: 4px; font-size: 11px; letter-spacing: 0.14em;">
+        <span ref="{{ knobRef }}" style="position: absolute; top: 4px; left: 4px; width: 34px; height: 23px; border-radius: 999px; background: #2b2621; transition: left .55s cubic-bezier(.34,1.42,.42,1), width .55s cubic-bezier(.34,1.42,.42,1), transform .55s cubic-bezier(.34,1.42,.42,1), border-radius .55s ease; pointer-events: none;"></span>
+        <span ref="{{ ruRef }}" onClick="{{ setRu }}" style="position: relative; padding: 5px 11px; cursor: pointer; color: #f4f1ec; transition: color .45s ease;">RU</span>
+        <span ref="{{ roRef }}" onClick="{{ setRo }}" style="position: relative; padding: 5px 11px; cursor: pointer; color: #8f877d; transition: color .45s ease;">RO</span>
+      </div>
+      <a ref="{{ cartRef }}" href="./Mebelissimo Cart.dc.html" style="color: #4a443d; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; font-size: clamp(12px, 1.15vw, 14px); letter-spacing: 0.05em; padding-left: clamp(10px, 1.4vw, 20px); border-left: 1px solid rgba(43,38,33,.18); transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; letter-spacing: 0.08em;"><span data-ro="Coș">Корзина</span><span style="display: inline-flex; align-items: center; justify-content: center; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px; background: #8a6a4b; color: #fdfbf7; font-size: 10.5px; letter-spacing: 0;">1</span></a>
+    </div>
+  </header>
+
+  <div ref="{{ runwayRef }}" style="position: relative; height: 100vh;">
+  <section ref="{{ heroRef }}" data-screen-label="Главная" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1; height: 100vh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: space-between; box-sizing: border-box; padding: clamp(84px, 13vh, 158px) 0 0; will-change: transform, opacity, filter;">
+
+    <div style="position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(12px, 2.1vh, 26px); max-width: 940px; padding: 0 40px; flex: 0 0 auto;">
+      <div style="font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: #8a6a4b; animation: mb-rise 1s cubic-bezier(.2,.7,.2,1) .25s both;" data-ro="Mobilă la comandă · Chișinău">Мебель по индивидуальным проектам · Chișinău</div>
+      <h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(34px, min(5.8vw, 7.4vh), 94px); line-height: 1.03; letter-spacing: -0.015em;">
+        <span style="display: block; animation: mb-rise 1.1s cubic-bezier(.2,.7,.2,1) .38s both;" data-ro="Ideile dumneavoastră —">Ваши идеи —</span>
+        <span style="display: block; font-style: italic; color: #8a6a4b; animation: mb-rise 1.1s cubic-bezier(.2,.7,.2,1) .5s both;" data-ro="Realizarea noastră">Наша реализация</span>
+      </h1>
+      <p style="margin: 0; max-width: 52ch; font-weight: 300; font-size: clamp(14px, 1.7vh, 16.5px); line-height: 1.75; color: #5b544c; animation: mb-rise 1.1s cubic-bezier(.2,.7,.2,1) .62s both;" data-ro="Ne specializăm în producerea mobilei la comandă: bucătării, dulapuri glisante, holuri, camere pentru copii, sufragerii, dormitoare, birouri etc.">Мы специализируемся на изготовлении мебели по индивидуальным проектам: кухни, шкафы-купе, прихожие, детские комнаты, гостиные, спальни, кабинеты и т.д.</p>
+      <div style="display: flex; align-items: center; gap: 34px; margin-top: 4px; animation: mb-rise 1.1s cubic-bezier(.2,.7,.2,1) .74s both;">
+        <a href="./Mebelissimo Shop.dc.html" style="display: inline-flex; align-items: center; gap: 14px; padding: 18px 34px; background: #2b2621; color: #f4f1ec; font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 12px 30px rgba(43,38,33,0); transition: background .5s cubic-bezier(.2,.7,.2,1), letter-spacing .5s cubic-bezier(.2,.7,.2,1), color .5s ease, box-shadow .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);" style-hover="background: #8a6a4b; letter-spacing: 0.21em; color: #fffdf9; box-shadow: 0 20px 44px rgba(138,106,75,.4);" style-active="transform: translateY(-1px) scale(.985);"><span data-ro="Spre magazin">Перейти в магазин</span><span style="font-size: 15px; line-height: 1;">→</span></a>
+        <a style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #5b544c; border-bottom: 1px solid rgba(43,38,33,.25); padding-bottom: 4px; transition: color .4s ease, border-color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #8a6a4b; border-color: #8a6a4b; letter-spacing: 0.2em;" data-ro="Designerii ca parteneri">Дизайнеры как партнёры</a>
+      </div>
+
+      <div data-stats="1" style="position: relative; z-index: 5; display: flex; align-items: flex-end; gap: clamp(22px, 3.4vw, 58px); margin-top: clamp(14px, 3vh, 34px); padding: 4px 0; animation: mb-rise 1.1s cubic-bezier(.2,.7,.2,1) .86s both;">
+      <a style="display: flex; flex-direction: column; align-items: center; gap: 8px; transition: color .4s ease;" style-hover="color: #8a6a4b;">
+        <span style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 3.4vh, 36px); line-height: 1;">43</span>
+        <span style="font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8f877d;" data-ro="Paturi">Кровати</span>
+      </a>
+      <span style="display: block; width: 1px; height: clamp(24px, 4.4vh, 40px); background: rgba(43,38,33,.16);"></span>
+      <a style="display: flex; flex-direction: column; align-items: center; gap: 8px; transition: color .4s ease;" style-hover="color: #8a6a4b;">
+        <span style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 3.4vh, 36px); line-height: 1;">23</span>
+        <span style="font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8f877d;" data-ro="Pentru copii">Детские</span>
+      </a>
+      <span style="display: block; width: 1px; height: clamp(24px, 4.4vh, 40px); background: rgba(43,38,33,.16);"></span>
+      <a style="display: flex; flex-direction: column; align-items: center; gap: 8px; transition: color .4s ease;" style-hover="color: #8a6a4b;">
+        <span style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 3.4vh, 36px); line-height: 1;">8</span>
+        <span style="font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8f877d;" data-ro="Canapele">Диваны</span>
+      </a>
+      <span style="display: block; width: 1px; height: clamp(24px, 4.4vh, 40px); background: rgba(43,38,33,.16);"></span>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: clamp(18px, 2.8vh, 29px); line-height: 1; color: #8a6a4b;" data-ro="Alegerea tapiseriei">Выбор обивки</span>
+        <span style="font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: #8f877d;" data-ro="Orice culoare și gust">Любой цвет и вкус</span>
+      </div>
+      </div>
+    </div>
+    <div style="flex: 1 1 12px; min-height: 12px;"></div>
+
+    <div ref="{{ fanRef }}" style="position: relative; width: 100%; z-index: 2; display: flex; align-items: flex-end; flex: 0 0 auto; pointer-events: none;">
+      <div data-i="0" style="flex: 1 1 0; min-width: 0; height: 100%; transform-origin: 50% 100%;">
+        <a data-card="fan" style="pointer-events: auto; position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #ded7cd; animation: mb-fade 1.3s ease .95s both;">
+          <div style="position: absolute; inset: 0; filter: saturate(.86) contrast(1.04);"><image-slot id="mb-f1" shape="rect" placeholder="фото"></image-slot></div>
+          <div data-scrim="1" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(43,38,33,0) 44%, rgba(43,38,33,.5) 100%); transition: background 2.2s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-dim="1" style="position: absolute; inset: 0; pointer-events: none; background: rgba(28,24,20,.5); opacity: 0; transition: opacity .77s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-label="1" style="position: absolute; left: 10px; right: 10px; bottom: clamp(18px, 2.2vw, 40px); pointer-events: none; text-align: center; color: #fff; font-size: clamp(11.5px, 1.1vw, 17px); letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 2px 16px rgba(0,0,0,.45);" data-ro="Paturi">Кровати</div>
+        </a>
+      </div>
+      <div data-i="1" style="flex: 1 1 0; min-width: 0; height: 100%; transform-origin: 50% 100%;">
+        <a data-card="fan" style="pointer-events: auto; position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #ded7cd; animation: mb-fade 1.3s ease 1.02s both;">
+          <div style="position: absolute; inset: 0; filter: saturate(.86) contrast(1.04);"><image-slot id="mb-f2" shape="rect" placeholder="фото"></image-slot></div>
+          <div data-scrim="1" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(43,38,33,0) 44%, rgba(43,38,33,.5) 100%); transition: background 2.2s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-dim="1" style="position: absolute; inset: 0; pointer-events: none; background: rgba(28,24,20,.5); opacity: 0; transition: opacity .77s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-label="1" style="position: absolute; left: 10px; right: 10px; bottom: clamp(18px, 2.2vw, 40px); pointer-events: none; text-align: center; color: #fff; font-size: clamp(11.5px, 1.1vw, 17px); letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 2px 16px rgba(0,0,0,.45);" data-ro="Paturi pentru copii">Кровати детские</div>
+        </a>
+      </div>
+      <div data-i="2" style="flex: 1 1 0; min-width: 0; height: 100%; transform-origin: 50% 100%;">
+        <a data-card="fan" style="pointer-events: auto; position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #ded7cd; animation: mb-fade 1.3s ease 1.09s both;">
+          <div style="position: absolute; inset: 0; filter: saturate(.86) contrast(1.04);"><image-slot id="mb-f3" shape="rect" placeholder="фото"></image-slot></div>
+          <div data-scrim="1" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(43,38,33,0) 44%, rgba(43,38,33,.5) 100%); transition: background 2.2s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-dim="1" style="position: absolute; inset: 0; pointer-events: none; background: rgba(28,24,20,.5); opacity: 0; transition: opacity .77s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-label="1" style="position: absolute; left: 10px; right: 10px; bottom: clamp(18px, 2.2vw, 40px); pointer-events: none; text-align: center; color: #fff; font-size: clamp(11.5px, 1.1vw, 17px); letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 2px 16px rgba(0,0,0,.45);" data-ro="Canapele">Диваны</div>
+        </a>
+      </div>
+      <div data-i="3" style="flex: 1 1 0; min-width: 0; height: 100%; transform-origin: 50% 100%;">
+        <a data-card="fan" style="pointer-events: auto; position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #ded7cd; animation: mb-fade 1.3s ease 1.02s both;">
+          <div style="position: absolute; inset: 0; filter: saturate(.86) contrast(1.04);"><image-slot id="mb-f4" shape="rect" placeholder="фото"></image-slot></div>
+          <div data-scrim="1" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(43,38,33,0) 44%, rgba(43,38,33,.5) 100%); transition: background 2.2s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-dim="1" style="position: absolute; inset: 0; pointer-events: none; background: rgba(28,24,20,.5); opacity: 0; transition: opacity .77s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-label="1" style="position: absolute; left: 10px; right: 10px; bottom: clamp(18px, 2.2vw, 40px); pointer-events: none; text-align: center; color: #fff; font-size: clamp(11.5px, 1.1vw, 17px); letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 2px 16px rgba(0,0,0,.45);" data-ro="Dulapuri glisante">Шкафы-купе</div>
+        </a>
+      </div>
+      <div data-i="4" style="flex: 1 1 0; min-width: 0; height: 100%; transform-origin: 50% 100%;">
+        <a data-card="fan" style="pointer-events: auto; position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #ded7cd; animation: mb-fade 1.3s ease .95s both;">
+          <div style="position: absolute; inset: 0; filter: saturate(.86) contrast(1.04);"><image-slot id="mb-f5" shape="rect" placeholder="фото"></image-slot></div>
+          <div data-scrim="1" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(43,38,33,0) 44%, rgba(43,38,33,.5) 100%); transition: background 2.2s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-dim="1" style="position: absolute; inset: 0; pointer-events: none; background: rgba(28,24,20,.5); opacity: 0; transition: opacity .77s cubic-bezier(.2,.7,.2,1);"></div>
+          <div data-label="1" style="position: absolute; left: 10px; right: 10px; bottom: clamp(18px, 2.2vw, 40px); pointer-events: none; text-align: center; color: #fff; font-size: clamp(11.5px, 1.1vw, 17px); letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 2px 16px rgba(0,0,0,.45);" data-ro="Bucătării">Кухни</div>
+        </a>
+      </div>
+    </div>
+
+    <div ref="{{ cueRef }}" style="display: flex; align-items: center; gap: 14px; position: absolute; left: clamp(14px, 2.4vw, 34px); top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; z-index: 5; font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: #8f877d; animation: mb-fade 1.4s ease 1.3s both;">
+      <span style="display: block; width: 1px; height: 46px; background: #8a6a4b; animation: mb-line 2.6s ease-in-out 1.6s infinite;"></span>
+      Прокрутите
+    </div>
+  </section>
+  </div>
+
+  <section ref="{{ panelRef }}" data-screen-label="Коллекция" style="position: relative; z-index: 10; background: #f7f4ef; padding: clamp(180px, 28vh, 280px) clamp(20px, 4vw, 56px) 110px; min-height: 100vh; mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0,0,0,1) 260px); -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0,0,0,1) 260px); will-change: mask-image;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(43,38,33,.12);">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: #8a6a4b;" data-ro="Colecție · 43 modele">Коллекция · 43 модели</div>
+        <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(38px, 4.4vw, 68px); line-height: 1;" data-ro="Paturi">Кровати</h2>
+      </div>
+      <a style="display: inline-flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #5b544c; padding-bottom: 6px; border-bottom: 1px solid rgba(43,38,33,.22); transition: color .4s ease, gap .4s ease, border-color .4s ease;" style-hover="color: #8a6a4b; gap: 20px; border-color: #8a6a4b;">Смотреть все<span>→</span></a>
+    </div>
+
+    <div ref="{{ gridRef }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 52px 40px; padding-top: 56px;">
+      <a style="display: flex; flex-direction: column; gap: 18px; transition: opacity .5s ease;" style-hover="opacity: .82;">
+        <div style="position: relative; aspect-ratio: 4 / 5; background: #ece7e0;">
+          <image-slot id="mb-p1" shape="rect" placeholder="Кровать Luna"></image-slot>
+          <div data-cart-btn="1" style="position: absolute; left: 16px; right: 16px; bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.16,.84,.24,1); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; background: rgba(33,29,25,.9); color: #f6f2ec; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+          <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25;">Кровать Luna</span>
+          <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">15 300 mdl</span>
+        </div>
+      </a>
+      <a style="display: flex; flex-direction: column; gap: 18px; transition: opacity .5s ease;" style-hover="opacity: .82;">
+        <div style="position: relative; aspect-ratio: 4 / 5; background: #ece7e0;">
+          <image-slot id="mb-p2" shape="rect" placeholder="Кровать Terry"></image-slot>
+          <div data-cart-btn="1" style="position: absolute; left: 16px; right: 16px; bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.16,.84,.24,1); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; background: rgba(33,29,25,.9); color: #f6f2ec; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+          <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25;">Кровать Terry</span>
+          <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">10 800 mdl</span>
+        </div>
+      </a>
+      <a style="display: flex; flex-direction: column; gap: 18px; transition: opacity .5s ease;" style-hover="opacity: .82;">
+        <div style="position: relative; aspect-ratio: 4 / 5; background: #ece7e0;">
+          <image-slot id="mb-p3" shape="rect" placeholder="Кровать Adeli"></image-slot>
+          <div data-cart-btn="1" style="position: absolute; left: 16px; right: 16px; bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.16,.84,.24,1); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; background: rgba(33,29,25,.9); color: #f6f2ec; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+          <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25;">Кровать Adeli</span>
+          <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">11 700 mdl</span>
+        </div>
+      </a>
+      <a style="display: flex; flex-direction: column; gap: 18px; transition: opacity .5s ease;" style-hover="opacity: .82;">
+        <div style="position: relative; aspect-ratio: 4 / 5; background: #ece7e0;">
+          <image-slot id="mb-p4" shape="rect" placeholder="Кровать Aurelia"></image-slot>
+          <div data-cart-btn="1" style="position: absolute; left: 16px; right: 16px; bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.16,.84,.24,1); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; background: rgba(33,29,25,.9); color: #f6f2ec; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+          <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25;">Кровать Aurelia</span>
+          <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">12 500 mdl</span>
+        </div>
+      </a>
+      <a style="display: flex; flex-direction: column; gap: 18px; transition: opacity .5s ease;" style-hover="opacity: .82;">
+        <div style="position: relative; aspect-ratio: 4 / 5; background: #ece7e0;">
+          <image-slot id="mb-p5" shape="rect" placeholder="Кровать Barocco"></image-slot>
+          <div data-cart-btn="1" style="position: absolute; left: 16px; right: 16px; bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.16,.84,.24,1); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; background: rgba(33,29,25,.9); color: #f6f2ec; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+          <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25;">Кровать Barocco</span>
+          <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">16 100 mdl</span>
+        </div>
+      </a>
+      <a style="display: flex; flex-direction: column; gap: 18px; transition: opacity .5s ease;" style-hover="opacity: .82;">
+        <div style="position: relative; aspect-ratio: 4 / 5; background: #ece7e0;">
+          <image-slot id="mb-p6" shape="rect" placeholder="Кровать Estel"></image-slot>
+          <div data-cart-btn="1" style="position: absolute; left: 16px; right: 16px; bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.16,.84,.24,1); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; background: rgba(33,29,25,.9); color: #f6f2ec; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; pointer-events: none;"><span data-ro="Adaugă în coș">В корзину</span><span style="font-size: 13px; line-height: 1;">+</span></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+          <span style="min-width: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25;">Кровать Estel</span>
+          <span style="flex: 0 0 auto; white-space: nowrap; font-size: 13px; letter-spacing: 0.06em; color: #5b544c;">16 500 mdl</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section ref="{{ reviewsRef }}" data-screen-label="Отзывы" style="position: relative; z-index: 10; background: #f7f4ef; padding: clamp(70px, 12vh, 120px) clamp(20px, 4vw, 56px) clamp(80px, 13vh, 130px);">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; padding-bottom: 44px; border-bottom: 1px solid rgba(43,38,33,.12);">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div data-ro="Ce spun clienții" style="font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: #8a6a4b;">Что говорят клиенты</div>
+        <h2 data-ro="Aprecieri" style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 58px); line-height: 1;">Оценки</h2>
+      </div>
+      <span data-ro="Mobilă la comandă din 2014" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8f877d;">Мебель на заказ с 2014 года</span>
+    </div>
+
+    <div data-rvwrap="1" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 46px; padding-top: 56px;">
+        <figure data-rv="1" style="margin: 0; display: flex; flex-direction: column; gap: 22px; opacity: 0; transform: translateY(40px); clip-path: inset(0 0 100% 0); transition: opacity 1.1s cubic-bezier(.16,.84,.24,1) 0ms, transform 1.1s cubic-bezier(.16,.84,.24,1) 0ms, clip-path 1.2s cubic-bezier(.16,.84,.24,1) 0ms;">
+          <div style="display: flex; gap: 3px;"><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span></div>
+          <blockquote data-ro="Patul a fost făcut exact pe dimensiunile noastre, tapiseria am ales-o împreună cu designerul. După un an arată ca nou." style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(19px, 1.6vw, 25px); line-height: 1.5; letter-spacing: -0.005em; color: #2b2621;">Кровать сделали точно по нашим размерам, обивку подбирали вместе с дизайнером. Через год выглядит как новая.</blockquote>
+          <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #8f877d;"><span style="display: block; width: 26px; height: 1px; background: rgba(43,38,33,.28);"></span><span data-ro="Irina">Ирина</span></figcaption>
+        </figure>
+        <figure data-rv="1" style="margin: 0; display: flex; flex-direction: column; gap: 22px; opacity: 0; transform: translateY(40px); clip-path: inset(0 0 100% 0); transition: opacity 1.1s cubic-bezier(.16,.84,.24,1) 150ms, transform 1.1s cubic-bezier(.16,.84,.24,1) 150ms, clip-path 1.2s cubic-bezier(.16,.84,.24,1) 150ms;">
+          <div style="display: flex; gap: 3px;"><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span></div>
+          <blockquote data-ro="Am comandat un dulap glisant pentru hol și un pat pentru copii. Termenele nu s-au mișcat cu nicio zi." style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(19px, 1.6vw, 25px); line-height: 1.5; letter-spacing: -0.005em; color: #2b2621;">Заказывали шкаф-купе в прихожую и детскую кровать. Сроки не сдвинулись ни на один день.</blockquote>
+          <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #8f877d;"><span style="display: block; width: 26px; height: 1px; background: rgba(43,38,33,.28);"></span><span data-ro="Andrei">Андрей</span></figcaption>
+        </figure>
+        <figure data-rv="1" style="margin: 0; display: flex; flex-direction: column; gap: 22px; opacity: 0; transform: translateY(40px); clip-path: inset(0 0 100% 0); transition: opacity 1.1s cubic-bezier(.16,.84,.24,1) 300ms, transform 1.1s cubic-bezier(.16,.84,.24,1) 300ms, clip-path 1.2s cubic-bezier(.16,.84,.24,1) 300ms;">
+          <div style="display: flex; gap: 3px;"><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span><span style="font-size: 11px; color: #8a6a4b;">★</span></div>
+          <blockquote data-ro="Ne-a plăcut că mostrele de textile au fost aduse acasă. Am ales un bej calm — s-a potrivit perfect." style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 400; font-size: clamp(19px, 1.6vw, 25px); line-height: 1.5; letter-spacing: -0.005em; color: #2b2621;">Приятно, что образцы тканей привезли домой. Выбрали спокойный беж — попали в интерьер.</blockquote>
+          <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #8f877d;"><span style="display: block; width: 26px; height: 1px; background: rgba(43,38,33,.28);"></span><span data-ro="Maria">Мария</span></figcaption>
+        </figure>  </section>
+
+  <section data-screen-label="Контакты" style="position: relative; z-index: 10; background: #211d19; color: #ece7df; padding: clamp(70px, 12vh, 118px) clamp(20px, 4vw, 56px) 44px;">
+    <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.1fr; gap: 48px;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; color: #f4efe7;">Mebelissimo</div>
+        <p style="margin: 0; max-width: 38ch; font-weight: 300; font-size: 14px; line-height: 1.75; color: #a9a096;" data-ro="Ne specializăm în producerea mobilei la comandă: bucătării, dulapuri glisante, holuri, camere pentru copii, sufragerii, dormitoare, birouri etc.">Мы специализируемся на изготовлении мебели по индивидуальным проектам: кухни, шкафы-купе, прихожие, детские комнаты, гостиные, спальни, кабинеты и т.д.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;" data-ro="Catalog">Каталог</div>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Paturi">Кровати</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Paturi pentru copii">Кровати детские</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Canapele">Диваны</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Designerii ca parteneri">Дизайнеры как партнёры</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;" data-ro="Suntem în contact">Мы на связи</div>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">Facebook</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">Instagram</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;" data-ro="Contacte">Контакты</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7d7469;" data-ro="Contacte">Контакты</div>
+        <a style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #f4efe7; transition: color .4s ease, letter-spacing .5s cubic-bezier(.2,.7,.2,1);" style-hover="color: #d3b291; letter-spacing: 0.015em;">+(373)&nbsp;6-90-38-380</a>
+        <a style="font-size: 14px; color: #ded7cd; transition: color .4s ease;" style-hover="color: #d3b291;">mebelissimo@mail.ru</a>
+        <a style="margin-top: 10px; align-self: flex-start; padding: 13px 22px; border: 1px solid rgba(236,231,223,.3); color: #f4efe7; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; transition: background .45s cubic-bezier(.2,.7,.2,1), color .45s ease, border-color .45s ease, letter-spacing .45s ease;" style-hover="background: #d3b291; color: #211d19; border-color: #d3b291; letter-spacing: 0.23em;" style-active="transform: scale(.97);" data-ro="Cont personal">Личный кабинет</a>
+      </div>
+    </div>
+    <div style="margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(236,231,223,.14); display: flex; align-items: center; justify-content: space-between; gap: 32px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #7d7469;">
+      <span>Mebelissimo © 2026</span>
+      <span>Chișinău, Moldova</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;panelFade&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:260,&quot;min&quot;:80,&quot;max&quot;:460,&quot;step&quot;:10,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Переход между экранами&quot;},&quot;dim&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.45,&quot;min&quot;:0,&quot;max&quot;:0.9,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Переход между экранами&quot;},&quot;heroBlur&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:3,&quot;min&quot;:0,&quot;max&quot;:8,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Переход между экранами&quot;}}">
+class Component extends DCLogic {
+  heroRef = React.createRef();
+  panelRef = React.createRef();
+  gridRef = React.createRef();
+  cueRef = React.createRef();
+  fanRef = React.createRef();
+  cartRef = React.createRef();
+  runwayRef = React.createRef();
+  ruRef = React.createRef();
+  roRef = React.createRef();
+  knobRef = React.createRef();
+  reviewsRef = React.createRef();
+  langRef = React.createRef();
+
+  applyCartBtn() {
+    (this.cards || []).forEach(card => {
+      const b = card.querySelector('[data-cart-btn]');
+      if (!b) return;
+      b.dataset.hidden = 'opacity: 0; transform: translateY(0) scale(.94);';
+      b.dataset.shown = 'opacity: 1; transform: translateY(0) scale(1);';
+      b.style.cssText = 'position: absolute; left: 50%; top: 50%; margin-left: -84px; margin-top: -23px; width: 168px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 9px; padding: 15px 0; border: 1px solid rgba(246,242,236,.85); background: rgba(33,29,25,.28); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); color: #fdfbf7; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; pointer-events: none; transition: opacity .5s cubic-bezier(.16,.84,.24,1), transform .6s cubic-bezier(.34,1.36,.42,1); ' + b.dataset.hidden;
+    });
+  }
+
+  applyReviews() {
+    const root = this.reviewsRef.current;
+    if (!root) return;
+    this.reviewItems = Array.from(root.querySelectorAll('[data-rvwrap="1"] [data-rv]'));
+  }
+
+  logoRef = React.createRef();
+  wordRef = React.createRef();
+  markRef = React.createRef();
+
+  syncLogo() {
+    const w = this.wordRef.current, m = this.markRef.current;
+    if (!w || !m) return;
+    const on = (window.scrollY || document.documentElement.scrollTop) > 48;
+    m.style.opacity = on ? '0' : '1';
+    m.style.transform = on ? 'translate(-50%, -50%) translateX(-40px) translateY(-20px)' : 'translate(-50%, -50%) translateX(-40px)';
+    m.style.transitionDelay = on ? '0s' : '.3s';
+    w.style.opacity = on ? '1' : '0';
+    w.style.transform = on ? 'translate(-50%, -50%) translateX(-40px)' : 'translate(-50%, -50%) translateX(-40px) translateY(14px)';
+    w.style.transitionDelay = on ? '.3s' : '0s';
+  }
+
+  lockLabelWidths() {
+    const root = this.heroRef.current ? (this.heroRef.current.closest('x-dc') || document) : document;
+    const header = root.querySelector('header');
+    if (!header) return;
+    header.querySelectorAll('[data-ro]').forEach(el => {
+      const ru = el.textContent;
+      const w1 = el.getBoundingClientRect().width;
+      el.textContent = el.dataset.ro;
+      const w2 = el.getBoundingClientRect().width;
+      el.textContent = ru;
+      el.style.display = 'inline-block';
+      el.style.textAlign = 'center';
+      el.style.minWidth = Math.ceil(Math.max(w1, w2)) + 'px';
+    });
+  }
+
+  moveKnob(lang) {
+    const knob = this.knobRef.current, host = this.langRef.current;
+    const target = lang === 'ro' ? this.roRef.current : this.ruRef.current;
+    if (!knob || !host || !target) return;
+    knob.style.left = (target.offsetLeft) + 'px';
+    knob.style.width = target.offsetWidth + 'px';
+    knob.style.height = target.offsetHeight + 'px';
+    knob.style.top = target.offsetTop + 'px';
+    knob.style.transform = 'scale(1.16, .82)';
+    clearTimeout(this.knobT);
+    this.knobT = setTimeout(() => { knob.style.transform = 'scale(1, 1)'; }, 200);
+    if (this.ruRef.current) this.ruRef.current.style.color = lang === 'ro' ? '#8f877d' : '#f4f1ec';
+    if (this.roRef.current) this.roRef.current.style.color = lang === 'ro' ? '#f4f1ec' : '#8f877d';
+  }
+
+  setLang(lang) {
+    this.lang = lang;
+    const root = this.heroRef.current ? this.heroRef.current.closest('x-dc') || document : document;
+    root.querySelectorAll('[data-ro]').forEach(el => {
+      if (!el.dataset.ru) el.dataset.ru = el.textContent;
+      el.textContent = lang === 'ro' ? el.dataset.ro : el.dataset.ru;
+    });
+    this.moveKnob(lang);
+    this.measureFan();
+  }
+
+  rest = [{ y: 170, r: 0 }, { y: 140, r: 0 }, { y: 122, r: 0 }, { y: 140, r: 0 }, { y: 170, r: 0 }];
+  out = [{ y: 18, r: 0 }, { y: 62, r: 0 }, { y: 86, r: 0 }, { y: 62, r: 0 }, { y: 18, r: 0 }];
+  spreadBase = [-1, -0.42, 0, 0.42, 1];
+
+  componentDidMount() {
+    this.cards = this.gridRef.current ? Array.from(this.gridRef.current.children) : [];
+    this.cards.forEach((c, i) => {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(90px)';
+      c.style.transition = 'opacity 1s cubic-bezier(.16,.84,.24,1) ' + ((i % 3) * 110) + 'ms, transform 1.1s cubic-bezier(.16,.84,.24,1) ' + ((i % 3) * 110) + 'ms';
+    });
+
+    this.cards.forEach(card => {
+      const b = card.querySelector('[data-cart-btn]');
+      if (!b) return;
+      card.addEventListener('mouseenter', () => { b.style.cssText = b.style.cssText.replace(b.dataset.hidden, '') + b.dataset.shown; });
+      card.addEventListener('mouseleave', () => { b.style.cssText = b.style.cssText.replace(b.dataset.shown, '') + b.dataset.hidden; });
+    });
+    this.applyCartBtn();
+    this.applyReviews();
+    requestAnimationFrame(() => { this.lockLabelWidths(); this.moveKnob('ru'); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { this.lockLabelWidths(); this.moveKnob(this.lang || 'ru'); });
+
+    this.wraps = this.fanRef.current ? Array.from(this.fanRef.current.children) : [];
+    this.tiles = this.wraps.map(w => w.firstElementChild);
+    this.hover = this.tiles.map(() => ({ tx: 0, ty: 0, ttx: 0, tty: 0 }));
+    this.paint = this.paint.bind(this);
+    this.loop = this.loop.bind(this);
+    this.tiles.forEach(tile => {
+      if (!tile) return;
+      const dim = tile.querySelector('[data-dim]');
+      const label = tile.querySelector('[data-label]');
+      if (label) label.style.transition = 'transform 1.1s cubic-bezier(.2,.7,.2,1), letter-spacing 1.1s cubic-bezier(.2,.7,.2,1)';
+      tile.addEventListener('mouseenter', () => {
+        if (dim) dim.style.opacity = '1';
+        if (label) { label.style.transform = 'scale(1.07)'; label.style.letterSpacing = '0.12em'; }
+      });
+      tile.addEventListener('mouseleave', () => {
+        if (dim) dim.style.opacity = '0';
+        if (label) { label.style.transform = 'scale(1)'; label.style.letterSpacing = '0.1em'; }
+      });
+    });
+
+    this.measureFan();
+    requestAnimationFrame(() => this.measureFan());
+    setTimeout(() => this.measureFan(), 1800);
+
+    this.tick = this.tick.bind(this);
+    this.onScroll = () => { this.syncLogo(); if (!this.queued) { this.queued = true; requestAnimationFrame(this.tick); } };
+    this.onResize = () => { this.syncCart(); this.moveKnob(this.lang || 'ru'); this.measureFan(); this.onScroll(); };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.syncCart();
+    this.syncLogo();
+    this.moveKnob('ru');
+    this.tick();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  syncCart() {
+    const narrow = window.innerWidth < 1120;
+    if (this.cartRef.current) {
+      this.cartRef.current.style.display = narrow ? 'none' : 'inline-flex';
+
+    }
+  }
+
+  measureFan() {
+    if (!this.tiles || !this.tiles.length) return;
+    const liftF = [0.34, 0.22, 0.13, 0.22, 0.34];
+    const hero = this.heroRef.current;
+    const pill = hero ? hero.querySelector('[data-stats]') : null;
+    const row = this.fanRef.current;
+    if (hero && row) {
+      let rowTop = 0;
+      for (let n = row; n && n !== hero; n = n.offsetParent) rowTop += n.offsetTop;
+      row.style.height = Math.max(96, Math.min(window.innerWidth / 5, Math.max(hero.clientHeight - rowTop, window.innerHeight * 0.56) + 20)) + 'px';
+    }
+    this.tiles.forEach((tile, i) => {
+      if (!tile) return;
+      const r = tile.getBoundingClientRect();
+      const h = r.height || 200;
+      const label = tile.querySelector('[data-label]');
+      let cap = 1e4;
+      if (hero && pill && label) {
+        let pillBottom = pill.offsetHeight;
+        for (let n = pill; n && n !== hero; n = n.offsetParent) pillBottom += n.offsetTop;
+        let tileTop = 0;
+        for (let n = tile; n && n !== hero; n = n.offsetParent) tileTop += n.offsetTop;
+        const labelTopRest = tileTop + label.offsetTop;
+        cap = labelTopRest - pillBottom - 12;
+      }
+      cap = Math.max(24, cap);
+      this.rest[i] = { y: 0, r: 0 };
+      this.out[i] = { y: -Math.round(Math.min(h * liftF[i], cap * (liftF[i] / 0.34))), r: 0 };
+    });
+    this.setFan(this.fanP || 0);
+  }
+
+  setFan(p) {
+    const spread = 0;
+    const lead = [0, 0.05, 0.1, 0.05, 0];
+    (this.wraps || []).forEach((w, i) => {
+      const s = Math.max(0, Math.min(1, (p - lead[i]) / (1 - lead[i])));
+      const e = s * s * (3 - 2 * s);
+      const a = this.rest[i], b = this.out[i];
+      const y = a.y + (b.y - a.y) * e;
+      const r = a.r + (b.r - a.r) * e;
+      const x = spread * this.spreadBase[i] * e;
+      w.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) rotate(' + r.toFixed(2) + 'deg)';
+    });
+  }
+
+  tick() {
+    this.queued = false;
+    const hero = this.heroRef.current, panel = this.panelRef.current;
+    if (!hero || !panel) return;
+    const vh = window.innerHeight || 1;
+    if (this.cueRef.current) this.cueRef.current.style.display = vh < 640 ? 'none' : 'flex';
+    const raw = (vh - panel.getBoundingClientRect().top) / vh;
+    const p = Math.max(0, Math.min(1, raw));
+    const e = p * p * (3 - 2 * p);
+    const depth = this.props.depth ?? 0.09;
+    const dim = this.props.dim ?? 0.45;
+    const blur = this.props.heroBlur ?? 3;
+    const fade = this.props.panelFade ?? 260;
+
+    hero.style.opacity = String(1 - dim * e);
+    hero.style.filter = 'blur(' + (blur * e).toFixed(2) + 'px)';
+    const g = 'linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0,0,0,1) ' + Math.round(fade * (1 - 0.42 * e)) + 'px)';
+    panel.style.maskImage = g;
+    panel.style.webkitMaskImage = g;
+
+    this.fanP = Math.max(0, Math.min(1, p / 0.88));
+    this.setFan(this.fanP);
+
+    if (!this.reviewItems || !this.reviewItems.length) this.applyReviews();
+    (this.reviewItems || []).forEach(el => {
+      if (el.dataset.seen) return;
+      if (el.getBoundingClientRect().top < vh * 0.9) {
+        el.dataset.seen = '1';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.clipPath = 'inset(0 0 0 0)';
+      }
+    });
+
+    this.cards.forEach(c => {
+      if (c.dataset.shown) return;
+      if (c.getBoundingClientRect().top < vh * 0.92) {
+        c.dataset.shown = '1';
+        c.style.opacity = '1';
+        c.style.transform = 'translateY(0)';
+      }
+    });
+  }
+
+  paint() {
+    (this.tiles || []).forEach((tile, i) => {
+      if (!tile) return;
+      const h = this.hover[i];
+      tile.style.transform = 'translate(' + h.tx.toFixed(1) + 'px, ' + h.ty.toFixed(1) + 'px)';
+    });
+  }
+
+  startLoop() {
+    if (!this.looping) { this.looping = true; requestAnimationFrame(this.loop); }
+  }
+
+  loop() {
+    let active = false;
+    (this.hover || []).forEach((h, i) => {
+      h.tx += (h.ttx - h.tx) * 0.1;
+      h.ty += (h.tty - h.ty) * 0.1;
+      if (Math.abs(h.ttx - h.tx) > 0.25 || Math.abs(h.tty - h.ty) > 0.25) active = true;
+      else if (h.ttx === 0 && h.tty === 0) { h.tx = 0; h.ty = 0; if (this.tiles[i]) this.tiles[i].style.zIndex = ''; }
+    });
+    this.paint();
+    this.looping = active;
+    if (active) requestAnimationFrame(this.loop);
+  }
+
+  componentDidUpdate(prev) {
+  }
+
+  renderVals() {
+    return {
+      logoRef: this.logoRef,
+      wordRef: this.wordRef,
+      markRef: this.markRef, reviewsRef: this.reviewsRef, knobRef: this.knobRef, langRef: this.langRef, ruRef: this.ruRef, roRef: this.roRef, setRu: () => this.setLang('ru'), setRo: () => this.setLang('ro'), heroRef: this.heroRef, panelRef: this.panelRef, gridRef: this.gridRef, cueRef: this.cueRef, fanRef: this.fanRef, cartRef: this.cartRef, runwayRef: this.runwayRef };
+  }
+}
+</script>
+</body>
+</html>
