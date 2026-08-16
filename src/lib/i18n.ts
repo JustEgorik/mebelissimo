@@ -133,15 +133,41 @@ export const T = {
   perPiece: c(" / шт", " / buc"),
 } satisfies Record<string, Copy>;
 
-/** «3 позиции» / «3 poziții» — форма для витрины, без полного склонения. */
+/** Русское склонение: 1 модель, 2–4 модели, 5–20 моделей. */
+function ru(n: number, one: string, few: string, many: string) {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return `${n} ${one}`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14))
+    return `${n} ${few}`;
+  return `${n} ${many}`;
+}
+
+/**
+ * Румынский: «de» появляется, когда число оканчивается на 00 или на 20–99.
+ * 8 modele, но 43 de modele.
+ */
+function ro(n: number, one: string, plural: string) {
+  if (n === 1) return `${n} ${one}`;
+  const mod100 = n % 100;
+  const de = mod100 === 0 || mod100 >= 20 ? "de " : "";
+  return `${n} ${de}${plural}`;
+}
+
 export function positions(n: number, lang: Lang) {
-  return lang === "ro" ? `${n} poziții` : `${n} позиции`;
+  return lang === "ro"
+    ? ro(n, "poziție", "poziții")
+    : ru(n, "позиция", "позиции", "позиций");
 }
 
 export function models(n: number, lang: Lang) {
-  return lang === "ro" ? `${n} modele` : `${n} модели`;
+  return lang === "ro"
+    ? ro(n, "model", "modele")
+    : ru(n, "модель", "модели", "моделей");
 }
 
 export function fabrics(n: number, lang: Lang) {
-  return lang === "ro" ? `${n} textile` : `${n} тканей`;
+  return lang === "ro"
+    ? ro(n, "textil", "textile")
+    : ru(n, "ткань", "ткани", "тканей");
 }
